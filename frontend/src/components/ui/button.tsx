@@ -17,10 +17,10 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-accent text-accent-fg shadow-accent " +
+          "bg-accent-solid text-accent-fg shadow-accent " +
           "bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0)_55%)] " +
-          "ring-1 ring-inset ring-white/15 hover:bg-accent-strong dark:hover:bg-accent " +
-          "hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_14px_32px_-10px_var(--glow)] dark:hover:brightness-110",
+          "ring-1 ring-inset ring-white/15 hover:bg-accent-solid-hover " +
+          "hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_14px_32px_-10px_var(--glow)]",
         secondary:
           "border border-line-strong bg-surface text-fg shadow-xs edge-highlight " +
           "hover:border-fg-muted/45 hover:bg-surface-2",

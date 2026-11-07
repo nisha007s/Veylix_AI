@@ -151,8 +151,8 @@ function HistoryTable({ entries }: { entries: HistoryEntry[] }) {
             <th scope="col" className="w-28 px-5 py-3 font-medium">Type</th>
             <th scope="col" className="px-3 py-3 font-medium">Target</th>
             <th scope="col" className="w-36 px-3 py-3 font-medium">Risk</th>
-            <th scope="col" className="w-24 px-3 py-3 text-right font-medium">Signals</th>
-            <th scope="col" className="w-44 px-3 py-3 font-medium">Scanned</th>
+            <th scope="col" className="hidden w-24 px-3 py-3 text-right font-medium lg:table-cell">Signals</th>
+            <th scope="col" className="w-40 px-3 py-3 font-medium lg:w-44">Scanned</th>
             <th scope="col" className="w-14 px-5 py-3"><span className="sr-only">Open</span></th>
           </tr>
         </thead>
@@ -176,7 +176,7 @@ function HistoryTable({ entries }: { entries: HistoryEntry[] }) {
               <td className="px-3 py-3.5">
                 <CategoryBadge category={result.category} size="sm" />
               </td>
-              <td className="px-3 py-3.5 text-right font-mono tabular-nums text-fg">{result.rule_evidence.length}</td>
+              <td className="hidden px-3 py-3.5 text-right font-mono tabular-nums text-fg lg:table-cell">{result.rule_evidence.length}</td>
               <td className="px-3 py-3.5 text-fg-muted">{formatDateTime(result.analysed_at)}</td>
               <td className="px-5 py-3.5 text-right">
                 <Link

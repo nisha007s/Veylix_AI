@@ -8,12 +8,12 @@ import { useHealth } from "../features/health/use-health";
 import { useHistory } from "../features/history/history-context";
 import { cn } from "../lib/utils";
 
-const NAV: { to: string; label: string; short: string; icon: LucideIcon; end?: boolean }[] = [
-  { to: "/", label: "Dashboard", short: "Overview", icon: LayoutGrid, end: true },
-  { to: "/scan/url", label: "URL Scanner", short: "URL", icon: Link2 },
-  { to: "/scan/email", label: "Email Scanner", short: "Email", icon: Mail },
-  { to: "/results", label: "Scan Results", short: "Results", icon: FileSearch },
-  { to: "/history", label: "Scan History", short: "History", icon: History },
+const NAV: { to: string; label: string; icon: LucideIcon; end?: boolean }[] = [
+  { to: "/", label: "Dashboard", icon: LayoutGrid, end: true },
+  { to: "/scan/url", label: "URL Scanner", icon: Link2 },
+  { to: "/scan/email", label: "Email Scanner", icon: Mail },
+  { to: "/results", label: "Scan Results", icon: FileSearch },
+  { to: "/history", label: "Scan History", icon: History },
 ];
 
 export function AppLayout() {
@@ -54,8 +54,8 @@ export function AppLayout() {
           <Brand />
 
           {/* Desktop navigation */}
-          <nav aria-label="Main" className="mx-auto hidden items-center gap-1 rounded-2xl border border-line bg-surface/70 p-1 shadow-xs md:flex">
-            {NAV.map(({ to, label, short, icon: Icon, end }) => (
+          <nav aria-label="Main" className="mx-auto hidden items-center gap-1 rounded-2xl border border-line bg-surface/70 p-1 shadow-xs lg:flex">
+            {NAV.map(({ to, label, icon: Icon, end }) => (
               <NavLink
                 key={to}
                 to={to}
@@ -73,8 +73,7 @@ export function AppLayout() {
                 {({ isActive }) => (
                   <>
                     <Icon className={cn("size-4", isActive && "text-accent")} aria-hidden="true" />
-                    <span className="hidden lg:inline">{label}</span>
-                    <span className="lg:hidden">{short}</span>
+                    <span>{label}</span>
                     {to === "/history" && entries.length > 0 && (
                       <span className="rounded-md bg-accent-soft px-1.5 py-0.5 font-mono text-[10px] leading-none text-accent-strong">
                         {entries.length}
@@ -86,13 +85,13 @@ export function AppLayout() {
             ))}
           </nav>
 
-          <div className="ml-auto flex items-center gap-2 md:ml-0">
+          <div className="ml-auto flex items-center gap-2 lg:ml-0">
             <HealthIndicator status={health} className="hidden sm:inline-flex" />
             <ThemeToggle />
             <button
               type="button"
               onClick={() => setMenuOpen((o) => !o)}
-              className="flex size-9 cursor-pointer items-center justify-center rounded-xl border border-line-strong bg-surface text-fg-soft shadow-xs transition-colors hover:bg-surface-2 hover:text-fg md:hidden"
+              className="flex size-9 cursor-pointer items-center justify-center rounded-xl border border-line-strong bg-surface text-fg-soft shadow-xs transition-colors hover:bg-surface-2 hover:text-fg lg:hidden"
               aria-label={menuOpen ? "Close navigation" : "Open navigation"}
               aria-expanded={menuOpen}
               aria-controls="mobile-nav"
@@ -107,7 +106,7 @@ export function AppLayout() {
           <nav
             id="mobile-nav"
             aria-label="Main"
-            className="border-t border-line bg-canvas/95 px-4 pb-4 pt-2 backdrop-blur-xl motion-safe:animate-fade md:hidden"
+            className="border-t border-line bg-canvas/95 px-4 pb-4 pt-2 backdrop-blur-xl motion-safe:animate-fade lg:hidden"
           >
             <ul className="grid gap-1">
               {NAV.map(({ to, label, icon: Icon, end }) => (
@@ -115,6 +114,7 @@ export function AppLayout() {
                   <NavLink
                     to={to}
                     end={end}
+                    onClick={() => setMenuOpen(false)}
                     className={({ isActive }) =>
                       cn(
                         "flex h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium transition-colors",

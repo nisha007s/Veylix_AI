@@ -20,10 +20,13 @@
   --line-strong: #cfd5e1;
   --fg: #0a1226;
   --fg-soft: #36425a;
-  --fg-muted: #6a7489;
+  --fg-muted: #5f6a7f;
   --accent: #2c55e8;
   --accent-strong: #1e40c0;
   --accent-fg: #ffffff;
+  /* Solid fills behind white text (primary buttons); kept ≥ 4.5:1 with --accent-fg. */
+  --accent-solid: #2c55e8;
+  --accent-solid-hover: #1e40c0;
   --accent-soft: #edf1ff;
   --accent-line: #c9d5ff;
   --navy: #0b1a3f;
@@ -69,6 +72,8 @@
   --accent: #5b82ff;
   --accent-strong: #7d9cff;
   --accent-fg: #ffffff;
+  --accent-solid: #3760ec;
+  --accent-solid-hover: #3d64f0;
   --accent-soft: rgba(91, 130, 255, 0.12);
   --accent-line: rgba(91, 130, 255, 0.35);
   --navy: #0b1a3f;
@@ -115,6 +120,8 @@
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
   --color-accent-fg: var(--accent-fg);
+  --color-accent-solid: var(--accent-solid);
+  --color-accent-solid-hover: var(--accent-solid-hover);
   --color-accent-soft: var(--accent-soft);
   --color-accent-line: var(--accent-line);
   --color-navy: var(--navy);
