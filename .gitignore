@@ -1,0 +1,94 @@
+# =============================================================
+# Veylix AI - .gitignore
+# Anything listed here is never committed to Git or pushed to GitHub.
+# =============================================================
+
+# ---------- Secrets and local configuration (SRS SEC-100) ----------
+# Real settings live in .env files on your machine only.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+secrets/
+
+# ---------- Outdated / duplicate documents ----------
+# Kept on disk for reference, but not tracked. The current documents
+# (PRD v1.2, SRS v1.1, SAD v1.1) in Documentation/ remain tracked.
+Documentation/Veylix_AI_SRS_v1.0.docx
+docs/Software_Architecture/
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.python-version
+
+# Test and tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# ---------- Node / frontend ----------
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---------- Jupyter ----------
+.ipynb_checkpoints/
+
+# ---------- ML data and model artifacts ----------
+# Datasets can be large and carry their own licences; keep them out of Git.
+# Document each dataset in ml/dataset_cards/ instead (SRS ML-003).
+ml/datasets/*
+!ml/datasets/.gitkeep
+
+# Serialized models are ignored by default until SAD-OD-02 is decided.
+# Metadata files (.json) beside the artifacts are still committed.
+*.joblib
+*.pkl
+*.pickle
+
+# ---------- Logs and runtime output ----------
+# Logs must never be committed (they could contain debugging details).
+*.log
+logs/
+
+# Generated reports are never stored (PRD FR-10); ignore any local test output.
+*.pdf
+!Documentation/**/*.pdf
+!docs/**/*.pdf
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# ---------- Editors and operating system ----------
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Microsoft Office temporary lock files (created while a .docx is open)
+~$*
