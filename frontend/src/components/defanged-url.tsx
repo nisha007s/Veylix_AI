@@ -9,7 +9,7 @@ interface Props {
 export function DefangedUrl({ value, className }: Props) {
   return (
     <span
-      className={cn("break-all font-mono text-[13px] text-ink-soft", className)}
+      className={cn("break-all font-mono text-[13px] text-fg-soft", className)}
       title="Defanged address — not clickable"
       translate="no"
     >

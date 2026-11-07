@@ -15,10 +15,10 @@ export function CategoryBadge({ category, size = "md", className }: Props) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full font-medium ring-1 ring-inset",
-        size === "sm" && "px-2 py-0.5 text-xs [&>svg]:size-3.5",
-        size === "md" && "px-2.5 py-1 text-xs [&>svg]:size-3.5",
-        size === "lg" && "px-3 py-1.5 text-sm [&>svg]:size-4",
+        "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full font-medium ring-1 ring-inset",
+        size === "sm" && "h-6 px-2 text-xs [&>svg]:size-3.5",
+        size === "md" && "h-7 px-2.5 text-xs [&>svg]:size-3.5",
+        size === "lg" && "h-8 px-3 text-sm [&>svg]:size-4",
         style.badge,
         className,
       )}

@@ -5,8 +5,14 @@ import { describe, expect, it } from "vitest";
 import { CategoryBadge } from "./components/category-badge";
 import { DefangedUrl } from "./components/defanged-url";
 import { ResultView } from "./features/scan/result-view";
+import { resolveTheme } from "./features/theme/theme";
 import { friendlyMessage } from "./lib/api/client";
 import type { Category, EmailScanResult, ScanResult } from "./types/api";
+
+/** Text a user would see: markup and attributes removed. */
+function visibleText(html: string): string {
+  return html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ");
+}
 
 const urlResult: ScanResult = {
   scan_id: null,
@@ -84,9 +90,25 @@ describe("ResultView", () => {
     expect(html).toContain("not proof of phishing");
   });
 
-  it("shows no percentages or raw scores", () => {
-    const html = renderToStaticMarkup(<ResultView result={urlResult} />);
-    expect(html).not.toMatch(/\d+(\.\d+)?\s*%/);
+  it("shows no percentages or raw scores in visible text", () => {
+    const text = visibleText(renderToStaticMarkup(<ResultView result={urlResult} />));
+    expect(text).not.toMatch(/\d+(\.\d+)?\s*%/);
+    expect(text.toLowerCase()).not.toContain("confidence");
+    expect(text.toLowerCase()).not.toContain("probability");
+  });
+
+  it("never words a Low result as a guarantee of safety", () => {
+    const low: ScanResult = {
+      ...urlResult,
+      category: "low",
+      category_label: "Low",
+      category_meaning: "No strong suspicious indicators were found.",
+      suggested_action: "This is not a guarantee of safety; continue normal caution.",
+      rule_evidence: [],
+    };
+    const text = visibleText(renderToStaticMarkup(<ResultView result={low} />));
+    expect(text).toContain("not a guarantee of safety");
+    expect(text.toLowerCase()).not.toMatch(/\b(is|this link is) safe\b/);
   });
 
   it("shows embedded link counts for email results", () => {
@@ -95,6 +117,21 @@ describe("ResultView", () => {
     expect(html).toContain("Not analysed");
     expect(html).toContain("hxxps://bit[.]ly/x");
     expect(html).not.toContain("<a ");
+  });
+});
+
+describe("resolveTheme", () => {
+  it("defaults to light when nothing is stored and the system has no dark preference", () => {
+    expect(resolveTheme(null, false)).toBe("light");
+  });
+  it("follows the system when the user has not chosen", () => {
+    expect(resolveTheme(null, true)).toBe("dark");
+  });
+  it.each(["light", "dark"] as const)("a manual %s choice wins over the system", (stored) => {
+    expect(resolveTheme(stored, stored === "light")).toBe(stored);
+  });
+  it("ignores unexpected stored values", () => {
+    expect(resolveTheme("purple", false)).toBe("light");
   });
 });
 

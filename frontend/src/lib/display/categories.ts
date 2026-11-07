@@ -4,52 +4,70 @@ import type { Category, Strength } from "../../types/api";
 
 interface CategoryStyle {
   label: string;
+  headline: string; // e.g. "High risk"
   icon: LucideIcon;
-  badge: string;   // pill colours
-  rail: string;    // accent bar on result cards
-  bar: string;     // distribution chart segment
-  soft: string;    // tinted panel
+  badge: string;    // pill
+  dot: string;      // solid colour (bars, dots, rails)
+  text: string;     // coloured text
+  soft: string;     // tinted background
+  line: string;     // tinted border
+  glow: string;     // emblem glow
 }
 
 // Every category always pairs colour with a text label and an icon (SRS UI-006).
+// Colours come from theme tokens, so both Light and Dark modes are covered.
 export const CATEGORY_STYLES: Record<Category, CategoryStyle> = {
   low: {
     label: "Low",
+    headline: "Low risk",
     icon: ShieldCheck,
-    badge: "bg-emerald-50 text-emerald-800 ring-emerald-200",
-    rail: "bg-emerald-500",
-    bar: "bg-emerald-500",
-    soft: "bg-emerald-50/60",
+    badge: "bg-risk-low-soft text-risk-low-text ring-risk-low-line",
+    dot: "bg-risk-low",
+    text: "text-risk-low-text",
+    soft: "bg-risk-low-soft",
+    line: "border-risk-low-line",
+    glow: "shadow-[0_0_0_6px_var(--risk-low-soft),0_12px_32px_-8px_var(--risk-low-line)]",
   },
   medium: {
     label: "Medium",
+    headline: "Medium risk",
     icon: TriangleAlert,
-    badge: "bg-amber-50 text-amber-900 ring-amber-200",
-    rail: "bg-amber-500",
-    bar: "bg-amber-400",
-    soft: "bg-amber-50/60",
+    badge: "bg-risk-medium-soft text-risk-medium-text ring-risk-medium-line",
+    dot: "bg-risk-medium",
+    text: "text-risk-medium-text",
+    soft: "bg-risk-medium-soft",
+    line: "border-risk-medium-line",
+    glow: "shadow-[0_0_0_6px_var(--risk-medium-soft),0_12px_32px_-8px_var(--risk-medium-line)]",
   },
   high: {
     label: "High",
+    headline: "High risk",
     icon: ShieldAlert,
-    badge: "bg-red-50 text-red-800 ring-red-200",
-    rail: "bg-red-500",
-    bar: "bg-red-500",
-    soft: "bg-red-50/60",
+    badge: "bg-risk-high-soft text-risk-high-text ring-risk-high-line",
+    dot: "bg-risk-high",
+    text: "text-risk-high-text",
+    soft: "bg-risk-high-soft",
+    line: "border-risk-high-line",
+    glow: "shadow-[0_0_0_6px_var(--risk-high-soft),0_12px_32px_-8px_var(--risk-high-line)]",
   },
   inconclusive: {
     label: "Inconclusive",
+    headline: "Inconclusive",
     icon: CircleHelp,
-    badge: "bg-slate-100 text-slate-700 ring-slate-200",
-    rail: "bg-slate-400",
-    bar: "bg-slate-400",
-    soft: "bg-slate-50",
+    badge: "bg-risk-inconclusive-soft text-risk-inconclusive-text ring-risk-inconclusive-line",
+    dot: "bg-risk-inconclusive",
+    text: "text-risk-inconclusive-text",
+    soft: "bg-risk-inconclusive-soft",
+    line: "border-risk-inconclusive-line",
+    glow: "shadow-[0_0_0_6px_var(--risk-inconclusive-soft),0_12px_32px_-8px_var(--risk-inconclusive-line)]",
   },
 };
 
 export const CATEGORY_ORDER: Category[] = ["high", "medium", "inconclusive", "low"];
 
 export const STRENGTH_LEVEL: Record<Strength, number> = { weak: 1, moderate: 2, strong: 3 };
+
+export const STRENGTH_ORDER: Strength[] = ["strong", "moderate", "weak"];
 
 // Plain-language text for backend codes.
 export const NOTICE_TEXT: Record<string, string> = {
