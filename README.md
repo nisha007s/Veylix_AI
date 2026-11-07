@@ -93,6 +93,15 @@ Run the tests and the API:
 
 API docs (development only): http://127.0.0.1:8000/api/v1/docs
 
+Frontend (requires Node.js 22; in a second terminal):
+
+```powershell
+cd frontend
+npm ci          # installs the exact versions from package-lock.json
+npm run dev     # http://localhost:5173 (forwards /api to the backend)
+npm test        # frontend safety tests
+```
+
 To add or upgrade a dependency: edit `backend/pyproject.toml`, then regenerate the lockfile:
 
 ```powershell
